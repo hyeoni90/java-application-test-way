@@ -3,8 +3,16 @@ package com.hyeonah.myway;
 import org.junit.jupiter.api.*;
 
 import java.time.Duration;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.api.condition.OS;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class ReportTest {
@@ -82,5 +90,80 @@ public class ReportTest {
     @AfterEach
     void afterEach() {
         System.out.println("after each");
+    }
+
+    @Test
+    @DisplayName("assumeTrue 테스트")
+    void create_test_env() {
+        String test_env = System.getenv("TEST_ENV");
+        System.out.println(test_env);
+        assumeTrue("LOCAL".equalsIgnoreCase(System.getenv(test_env)));
+
+        Report report = new Report(10);
+        assertThat(report.getLimit()).isGreaterThan(0);
+    }
+
+    @Test
+    void create_assumingThat() {
+        String test_env = System.getenv("TEST_ENV");
+        assumingThat("LOCAL".equalsIgnoreCase(System.getenv(test_env)),  () -> {
+            Report report = new Report(10);
+            assertThat(report.getLimit()).isGreaterThan(0);
+        });
+
+        assumingThat("hyeonah".equalsIgnoreCase(System.getenv(test_env)),  () -> {
+            Report report = new Report(10);
+            assertThat(report.getLimit()).isGreaterThan(0);
+        });
+    }
+
+    @Test
+    @DisplayName("EnabledOnOs 어노테이션으로 테스트 운영체제가 특정 OS 특화 테스트")
+    @EnabledOnOs({OS.MAC, OS.LINUX})
+    void create_enabledOnOs() {
+        String test_env = System.getenv("TEST_ENV");
+        assumingThat("LOCAL".equalsIgnoreCase(System.getenv(test_env)),  () -> {
+            Report report = new Report(10);
+            assertThat(report.getLimit()).isGreaterThan(0);
+        });
+
+        assumingThat("hyeonah".equalsIgnoreCase(System.getenv(test_env)),  () -> {
+            Report report = new Report(10);
+            assertThat(report.getLimit()).isGreaterThan(0);
+        });
+    }
+
+    @Test
+    @DisplayName("EnabledOnOs 어노테이션으로 특정 OS 테스트")
+    @EnabledOnOs(OS.MAC)
+    void create_enabled_on_mac() {
+        String test_env = System.getenv("TEST_ENV");
+        assumingThat("LOCAL".equalsIgnoreCase(System.getenv(test_env)),  () -> {
+            Report report = new Report(10);
+            assertThat(report.getLimit()).isGreaterThan(0);
+        });
+
+        assumingThat("hyeonah".equalsIgnoreCase(System.getenv(test_env)),  () -> {
+            Report report = new Report(10);
+            assertThat(report.getLimit()).isGreaterThan(0);
+        });
+    }
+
+    @Test
+    @DisplayName("EnabledOnJre 어노테이션을 활용한 Java 버전 테스트")
+    @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_9, JRE.JAVA_10, JRE.JAVA_11})
+    void create_enabled_on_jre() {
+        String test_env = System.getenv("TEST_ENV");
+        assumingThat("LOCAL".equalsIgnoreCase(System.getenv(test_env)),  () -> {
+            Report report = new Report(10);
+            assertThat(report.getLimit()).isGreaterThan(0);
+        });
+    }
+
+    @Test
+    @DisplayName("EnabledIfEnvironmentVariable 어노테이션을 활용한 테스트")
+    @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "TEST_ENV")
+    void create_enabled_if_env() {
+        System.out.println("create_enabled_if_env");
     }
 }
