@@ -1,4 +1,4 @@
-package com.hyeonah.myway;
+package com.hyeonah.myway.junit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -69,6 +70,7 @@ class ReportTest {
         assertEquals("limit은 0 보다 커야 합니다.", exception.getMessage());
     }
 
+    @Disabled
     @Test
     void create2() {
         assertTimeout(Duration.ofMillis(100), () -> {
@@ -77,6 +79,7 @@ class ReportTest {
         });
     }
 
+    @Disabled
     @Test
     void create3() {
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
