@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
@@ -179,6 +181,13 @@ class ReportTest {
     void create_slow() {
         final Report report = new Report(100);
         assertThat(report.getLimit()).isGreaterThan(10);
+    }
+
+    @DisplayName("보고서 만들기")
+    @RepeatedTest(value = 10, name = "{displayName}: {currentRepetition} / {totalRepetitions}")
+    void repeat_test(final RepetitionInfo repetitionInfo) {
+        System.out
+            .println("test" + repetitionInfo.getCurrentRepetition() + " / " + repetitionInfo.getTotalRepetitions());
     }
 
     /**
