@@ -4,6 +4,38 @@ Java, Spring 애플리케이션을 테스트 하는 방법들에 대한 예제
 ## Junit5
 - Assertion 활용한 테스트 코드 작성 방법
 
+ 
+### Extension Model
+- @RunWith(Runner), TestRule, MethodRule for Junit 4
+- Extension in Junit 5 
+
+Register Extension
+1. Declarative Registration - @ExtendWith({extensionInstanceName}.class)
+```java
+@ExtendWith({FindSlowTestExtension}.class)
+class ReportTest {
+    ...
+}
+``` 
+
+2. Programmatic Registration - @RegisterExtension
+```java
+class ReportTest {
+    
+    @RegisterExtension
+    static FindSlowTestExtension findSlowTestExtension = new FindSlowTestExtension({THRESHOLD});
+}
+``` 
+3. Automatic Registration - ServiceLoader  
+```
+ex) junit-platform.properties
+
+junit.jupiter.extensions.autodetection.enabled = true
+```
+
+references
+- https://www.baeldung.com/junit-5-extensions
+
 ## Mockito
 
 ## JMeter 
