@@ -1,4 +1,4 @@
-# My Way
+# Java Application Testing Way Example
 Java, Spring 애플리케이션을 테스트 하는 방법들에 대한 예제 
 
 ## Junit5
