@@ -2,8 +2,20 @@
 Java, Spring 애플리케이션을 테스트 하는 방법들에 대한 예제 
 
 ## Junit5
-- Assertion 활용한 테스트 코드 작성 방법
 
+### 테스트 기본 원칙
+> 단위 테스트 원칙 - **F.I.R.S.T**
+> * Fast: 유닛테스트는 빨라야 한다.
+> * Isolated: 다른 테스트에 종속적인 테스트는 절대 작성하지 않는다.
+> * Repeatable: 테스트는 실행할 때 마다 같은 결과를 만들어야한다.
+> * Self-validating: 테스트는 스스로 결과물에 대한 옳고 그름을 판단할 수 있어야 한다. 
+> * Timely: 유닛 테스트는 production 코드가 테스트를 통과하기 직전에 구성되어야 한다. 
+      이는 테스트 주도 개발(TDD) 방법론에 적합한 원칙이나 실제로 적용되지 않는 경우도 있다.
+
+단위 테스트 (unit test), 통합 테스트 (integration test), 인수테스트 (acceptance test) 등 다양한 테스트가 존재한다.
+각 테스트의 목적과 상황에 맞게 테스트를 구성하는 것도 중요하다.
+
+- Assertion 활용한 테스트 코드 작성 방법
  
 ### Extension Model
 - @RunWith(Runner), TestRule, MethodRule for Junit 4
