@@ -1,4 +1,4 @@
-# My Way
+# Java Application Testing Way Example
 Java, Spring 애플리케이션을 테스트 하는 방법들에 대한 예제 
 
 ## Junit5
@@ -18,10 +18,10 @@ Java, Spring 애플리케이션을 테스트 하는 방법들에 대한 예제
 - Assertion 활용한 테스트 코드 작성 방법
  
 ### Extension Model
-- @RunWith(Runner), TestRule, MethodRule for Junit 4
-- Extension in Junit 5 
+- Junit 4: @RunWith(Runner), TestRule, MethodRule
+- Junit 5: Extension
 
-Register Extension
+#### Register Extension
 1. Declarative Registration - @ExtendWith({extensionInstanceName}.class)
 ```java
 @ExtendWith({FindSlowTestExtension}.class)
@@ -38,6 +38,7 @@ class ReportTest {
     static FindSlowTestExtension findSlowTestExtension = new FindSlowTestExtension({THRESHOLD});
 }
 ``` 
+
 3. Automatic Registration - ServiceLoader  
 ```
 ex) junit-platform.properties
@@ -53,9 +54,10 @@ references
 ## JMeter 
 `성능 측정 및 부하 테스트 기능을 제공하는 오픈 소스 자바 애플리케이션`으로, 
 CLI 를 지원하여 CI or CD 툴과 연동할때 편리하며 UI 사용하는 것보다 메모리 등 시스템 리소스를 적게 사용한다.
+
 ** JMeter 도 시스템 리소스를 사용하기 때문에, 테스트 하고자 하는 애플리케이션과 서버가 분리된 환경에서 테스트 해야한다.
 
-애플리케이션 테스트 지원 형태 )
+### 애플리케이션 테스트 지원 형태 )
 - 웹 http, https
 - SOAP / REST web service
 - FTP
@@ -63,7 +65,7 @@ CLI 를 지원하여 CI or CD 툴과 연동할때 편리하며 UI 사용하는 �
 - Mail (SMTP, POP3, IMAP)
 - etc ...
 
-주요 개념 )
+### 주요 개념
 - Thread Group: 한 스레드 당 유저 한명 (유저의 그룹이라고 이해 하고, 유저의 수)
 - Sampler: 어떤 유저가 해야하는 액션 (HTTP 요청 같은 것들을 하나의 sampler 라고 본다.)
 - Listener: 응답을 받았을 할 일 (리포팅, 검증, 그래프 그리기 등)
