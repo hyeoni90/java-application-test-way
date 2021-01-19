@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,12 +22,14 @@ public class Coupon {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    private Member member;
+
     private String code;
     private CouponStatus status = CouponStatus.DRAFT;
     private String name;
     private int limitCount;
     private LocalDateTime expiredDateTime;
-    private Long memberId;
 
     public Coupon(final int limit, final String name) {
         this.limitCount = limit;
