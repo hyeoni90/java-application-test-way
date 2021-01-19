@@ -22,22 +22,14 @@ public class CouponService {
 
     public Coupon receiveCoupon(final Long memberId, final Coupon coupon) {
         final Optional<Member> member = memberService.findById(memberId);
-        if(member.isPresent()) {
-            coupon.setMemberId(memberId);
-        } else {
-            throw new IllegalArgumentException("Member doesn't exist for id:'" + memberId + "'");
-        }
-
-        final Coupon newCoupon = couponRepository.save(coupon);
-        memberService.notify(newCoupon);
-        return newCoupon;
+        coupon.setMember(
+            member.orElseThrow(() -> new IllegalArgumentException("Member doesn't exist for id:'" + memberId + "'")));
+        return couponRepository.save(coupon);
     }
 
     public Coupon activeCoupon(final Coupon coupon) {
         coupon.active();
-        final Coupon activeCoupon = couponRepository.save(coupon);
-        memberService.notify(activeCoupon);
-        return activeCoupon;
+        return couponRepository.save(coupon);
     }
 
 }
