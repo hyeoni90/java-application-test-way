@@ -1,19 +1,21 @@
 package com.hyeonah.myway.member;
 
-import com.hyeonah.myway.domain.Coupon;
 import com.hyeonah.myway.domain.Member;
 import java.util.Optional;
 
 /**
- * Created by hyeonahlee on 2020-12-26.
+ * Created by hyeonahlee on 2021-01-19.
  */
-public interface MemberService {
+public class MemberService {
 
-    Optional<Member> findById(Long memberId);
+    private final MemberRepository memberRepository;
 
-    void validate(Long memberId);
+    public MemberService(final MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
-    void notify(Coupon newCoupon);
+    public Optional<Member> findById(final Long memberId) {
+        return memberRepository.findById(memberId);
+    }
 
-    void notify(Member member);
 }
