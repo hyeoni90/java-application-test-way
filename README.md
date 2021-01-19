@@ -46,10 +46,50 @@ ex) junit-platform.properties
 junit.jupiter.extensions.autodetection.enabled = true
 ```
 
-references
-- https://www.baeldung.com/junit-5-extensions
+### References
+- [junit-5-extensions example](https://www.baeldung.com/junit-5-extensions)
 
 ## Mockito
+### Mockito 란?
+Mock(가짜 객체)을 생성, 관리하고 검증하여 단위 테스트를 위한 프레임워크
+
+### 쓰는 이유?
+- 컨트롤 하기 어려운 부분을 Mock 객체로 대체해 테스트하려는 부분에 집중할 수 있다 (ex. payment, external API, ...)
+- 간혹 복잡할 수 있는 의존성을 간소화시키고, 테스트 실행 속도를 향상시킨다.
+
+### Mockito 설정
+`Spring Boot 2.2.x 이상` 버전 **spring-boot-starter-test** 에서 자동으로 추가 해준다. 
+```groovy
+spring-boot-starter-test > mockito-core, mockito-junit-jupiter
+```
+
+만약 없다면 (Spring Boot를 사용하지 않거나), [maven repo](https://mvnrepository.com/) 에서 아래 dependency를 추가한다. 
+- gradle > build.gradle
+```groovy
+testImplementation 'org.mockito:mockito-core:3.7.0'
+testImplementation 'org.mockito:mockito-junit-jupiter:3.7.0'
+```
+- maven > pom.xml
+```xml
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>3.7.0</version>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-junit-jupiter</artifactId>
+    <version>3.7.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### References
+- [Mockito 공식 문서](https://site.mockito.org/)
+- [마틴 파울러의 유닛테스트에 대한 고찰](https://martinfowler.com/bliki/UnitTest.html)
+- [mockito argument matchers example](https://www.baeldung.com/mockito-argument-matchers)
 
 ## JMeter 
 `성능 측정 및 부하 테스트 기능을 제공하는 오픈 소스 자바 애플리케이션`으로, 
